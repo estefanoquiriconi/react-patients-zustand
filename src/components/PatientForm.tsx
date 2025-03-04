@@ -1,22 +1,22 @@
 import { useForm, SubmitHandler } from 'react-hook-form'
 import { Error } from './Error'
-
-type Inputs = {
-  name: string
-  caretaker: string
-  email: string
-  date: Date
-  symptoms: string
-}
+import { DraftPatient } from '../types'
+import { usePatientStore } from '../store'
 
 export const PatientForm = () => {
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<Inputs>()
+    reset,
+  } = useForm<DraftPatient>()
 
-  const onSubmit: SubmitHandler<Inputs> = (data) => console.log(data)
+  const addPatient = usePatientStore((state) => state.addPatient)
+
+  const onSubmit: SubmitHandler<DraftPatient> = (data) => {
+    addPatient(data)
+    reset()
+  }
 
   return (
     <div className='md:w-1/2 lg:w-2/5 mx-5'>
