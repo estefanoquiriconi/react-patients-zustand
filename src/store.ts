@@ -1,5 +1,6 @@
 import { create } from 'zustand'
 import { DraftPatient, Patient } from './types'
+import { devtools } from 'zustand/middleware'
 
 interface PatientState {
   patients: Patient[]
@@ -16,27 +17,29 @@ const createPatient = (patient: DraftPatient): Patient => {
   }
 }
 
-export const usePatientStore = create<PatientState>((set) => ({
-  patients: [],
+export const usePatientStore = create<PatientState>()(
+  devtools((set) => ({
+    patients: [],
 
-  activeId: '',
+    activeId: '',
 
-  addPatient: (data) => {
-    const newPatient = createPatient(data)
-    set((state) => ({
-      patients: [...state.patients, newPatient],
-    }))
-  },
+    addPatient: (data) => {
+      const newPatient = createPatient(data)
+      set((state) => ({
+        patients: [...state.patients, newPatient],
+      }))
+    },
 
-  deletePatient: (id) => {
-    set((state) => ({
-      patients: state.patients.filter((patient) => patient.id !== id),
-    }))
-  },
+    deletePatient: (id) => {
+      set((state) => ({
+        patients: state.patients.filter((patient) => patient.id !== id),
+      }))
+    },
 
-  getPatientById: (id) => {
-    set(() => ({
-      activeId: id,
-    }))
-  },
-}))
+    getPatientById: (id) => {
+      set(() => ({
+        activeId: id,
+      }))
+    },
+  }))
+)
