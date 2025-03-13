@@ -1,54 +1,69 @@
-# React + TypeScript + Vite
+# Proyecto de Gestión de Pacientes Veterinarios
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Este proyecto es una aplicación web construida con React, TypeScript y Vite, diseñada para gestionar el seguimiento de pacientes en una clínica veterinaria. Permite agregar, editar y eliminar información de pacientes, así como visualizar sus detalles.
 
-Currently, two official plugins are available:
+## Requisitos
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Asegúrate de tener instalado [Node.js](https://nodejs.org/)
 
-## Expanding the ESLint configuration
+## Instalación
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+1. Clona el repositorio:
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+```bash
+  git clone https://github.com/estefanoquiriconi/react-patients-zustand
+  cd react-patients-zustand
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+2. Instala las dependencias:
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
+```bash
+npm install
 ```
+
+## Ejecución
+
+Para iniciar la aplicación en modo de desarrollo, ejecuta:
+
+```bash
+npm run dev
+```
+
+La aplicación estará disponible en `http://localhost:5173` (o el puerto que Vite asigne).
+
+## Compilación para producción
+
+Para compilar la aplicación para producción:
+
+```bash
+npm run build
+```
+
+Los archivos compilados se generarán en el directorio `dist/`.
+
+## Características principales
+
+- Registro de nuevos pacientes con información detallada
+- Edición de información de pacientes existentes
+- Eliminación de registros de pacientes
+- Interfaz de usuario intuitiva y responsive
+- Almacenamiento local de datos mediante localStorage
+
+## Estructura del proyecto
+
+```
+/src
+  /components      # Componentes reutilizables
+  /hooks           # Custom hooks
+  /types           # Definiciones de tipos TypeScript
+  /utils           # Funciones de utilidad
+  App.tsx          # Componente principal
+  main.tsx         # Punto de entrada
+```
+
+## Tecnologías utilizadas
+
+- React 18
+- TypeScript
+- Vite
+- Tailwind CSS
