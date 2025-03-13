@@ -1,4 +1,7 @@
+import { useEffect } from 'react'
 import { useForm, SubmitHandler } from 'react-hook-form'
+import { toast } from 'react-toastify'
+
 import { Error } from './Error'
 import { DraftPatient } from '../types'
 import { usePatientStore } from '../store'
@@ -7,14 +10,32 @@ export const PatientForm = () => {
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    setValue,
     reset,
+    formState: { errors },
   } = useForm<DraftPatient>()
 
-  const addPatient = usePatientStore((state) => state.addPatient)
+  const { addPatient, activeId, patients, updatePatient } = usePatientStore()
+
+  useEffect(() => {
+    if (activeId) {
+      const activePatient = patients.find((patient) => patient.id === activeId)
+      setValue('name', activePatient!.name)
+      setValue('caretaker', activePatient!.caretaker)
+      setValue('email', activePatient!.email)
+      setValue('date', activePatient!.date)
+      setValue('symptoms', activePatient!.symptoms)
+    }
+  }, [activeId, patients, setValue])
 
   const onSubmit: SubmitHandler<DraftPatient> = (data) => {
-    addPatient(data)
+    if (activeId) {
+      updatePatient(data)
+      toast.success('Paciente actualizado')
+    } else {
+      addPatient(data)
+      toast.success('Paciente registrado')
+    }
     reset()
   }
 
